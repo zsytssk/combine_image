@@ -7,6 +7,13 @@
   - 如果都是一样大, 裁剪都要一样大
   - 不然也需要裁剪
 
+- @ques 还有什么优化方法
+  - futures
+  - 细节优化
+  - https://crates.io/crates/state
+
+## 2019-06-13 22:17:54
+
 - test all bin
   cargo run --release D:\zsytssk\job\legend\legend_demo\dlc D:\zsytssk\job\legend\legend_demo\bin\resources atlas 2 2 resources/
 
@@ -15,7 +22,7 @@
 
 * test desktop
 
-cargo run --release C:\Users\zhangshiyang\Desktop\test\src C:\Users\zhangshiyang\Desktop\test\test atlas 5 5 resources/
+cargo run --release C:\Users\zsyts\Desktop\test\dlc C:\Users\zsyts\Desktop\test\dist atlas 5 5 resources/
 
 - test local
 
