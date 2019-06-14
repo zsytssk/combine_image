@@ -8,9 +8,13 @@
   - 不然也需要裁剪
 
 - @ques 还有什么优化方法
+
   - futures
   - 细节优化
+
   - https://crates.io/crates/state
+
+- 本地 laya 的速度 vs wsl 上面的速度
 
 ## 2019-06-13 22:17:54
 
@@ -23,6 +27,7 @@
 * test desktop
 
 cargo run --release C:\Users\zsyts\Desktop\test\dlc C:\Users\zsyts\Desktop\test\dist atlas 5 5 resources/
+cargo run --release /mnt/c/Users/zsyts/Desktop/test/dlc /mnt/c/Users/zsyts/Desktop/test/dist atlas 5 5 resources/
 
 - test local
 
