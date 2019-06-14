@@ -39,6 +39,3 @@ pub fn run(path: PathMap) -> ImgMap {
     ImgMap::new(name, img_list)
 }
 
-pub fn removeImgListEmpty(img_list: &Vec<ImgItem>, same_size: bool) {
-    for item in img_list {}
-}

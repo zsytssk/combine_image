@@ -5,7 +5,7 @@ pub fn is_exist(path_str: &str) -> bool {
     let path = Path::new(path_str);
     path.exists()
 }
-pub fn path_type(path_str: &str) -> &str {
+pub fn _path_type(path_str: &str) -> &str {
     let path = Path::new(path_str);
     if path.is_dir() {
         return "is_dir";
@@ -18,7 +18,7 @@ pub fn file_name(path_str: &str) -> &str {
     path.file_name().unwrap().to_str().unwrap()
 }
 
-pub fn dir_path(path_str: &str) -> &str {
+pub fn _dir_path(path_str: &str) -> &str {
     let path = Path::new(path_str);
     path.parent().unwrap().to_str().unwrap()
 }
@@ -48,7 +48,7 @@ pub fn relative(file: &str, base: &str) -> Result<String, String> {
             };
             return file_path;
         }
-        Err(e) => Err("fail to get re".to_owned()),
+        Err(_e) => Err("fail to get re".to_owned()),
     }
 }
 
