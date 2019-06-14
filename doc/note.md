@@ -1,5 +1,14 @@
 - 将文件保存 看家里电脑有多快
 
+- imageproc raster
+
+  - image 15420
+  - raster 15420
+
+- simd 到底是什么...
+
+- rust get vector biggest
+
 ## 2019-06-12 21:09:52
 
 - @todo 裁剪空白区域
@@ -23,6 +32,8 @@
 * test desktop
 
 cargo run --release C:\Users\zsyts\Desktop\test\dlc C:\Users\zsyts\Desktop\test\dist atlas 5 5 resources/
+
+cargo run --release C:\Users\zhangshiyang\Desktop\test\dlc C:\Users\zhangshiyang\Desktop\test\dist atlas 5 5 resources/
 
 - test local
 

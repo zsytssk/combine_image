@@ -2,6 +2,7 @@ use super::img_map::ImgMap;
 
 use crate::state;
 use crate::utils::path;
+use crate::utils::img::{size};
 
 pub fn to_json(img_map: &mut ImgMap) -> String {
     let image = format!("{}.png", path::file_name(&img_map.name));
@@ -17,11 +18,12 @@ pub fn to_json(img_map: &mut ImgMap) -> String {
     let list = &img_map.list;
     for (index, item) in list.iter().enumerate() {
         let buffer = &item.buffer;
+        let (w, h) = size(buffer);
         let ori_size = &item.ori_size;
         let frame = format!(
             " {{ \"h\": {}, \"idx\": 0, \"w\": {}, \"x\": {}, \"y\": {} }}",
-            buffer.height(),
-            buffer.width(),
+            w,
+            h,
             item.x,
             item.y
         );

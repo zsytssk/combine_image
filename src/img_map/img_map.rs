@@ -1,5 +1,5 @@
 use super::super::utils::{
-    img::{combine, Buffer, List},
+    img::{combine, Buffer, List, size},
     pack_rect::{run as pack, RectList},
 };
 
@@ -11,8 +11,8 @@ use crate::state;
 pub struct ImgMap {
     pub name: String,
     pub list: Vec<ImgItem>,
-    pub width: u32,
-    pub height: u32,
+    pub width: i32,
+    pub height: i32,
 }
 
 impl ImgMap {
@@ -28,19 +28,19 @@ impl ImgMap {
         let list = &mut self.list;
         let mut rect_list: RectList = vec![];
         let state = &(&state::STATE).lock().unwrap();
-        let space_width = state.space_width;
-        let space_height = state.space_height;
+        let space_width = state.space_width as i32;
+        let space_height = state.space_height as i32;
         for item in list.iter() {
-            let (w, h) = item.buffer.dimensions();
+            let (w, h ) = size(&item.buffer);
             rect_list.push(((w + space_width) as i32, (h + space_height) as i32))
         }
         let ((width, height), pos_list) = pack(rect_list);
 
         for (i, item) in list.iter_mut().enumerate() {
             let (x, y) = pos_list[i];
-            item.set_pos(x as u32, y as u32);
+            item.set_pos(x, y);
         }
-        self.set_size(width as u32, height as u32);
+        self.set_size(width, height);
     }
     pub fn combine(&mut self) -> Buffer {
         self.set_img_pos();
@@ -57,7 +57,7 @@ impl ImgMap {
         }
         return combine(((w, h), buffer_list));
     }
-    pub fn set_size(&mut self, w: u32, h: u32) {
+    pub fn set_size(&mut self, w: i32, h: i32) {
         self.width = w;
         self.height = h;
     }
