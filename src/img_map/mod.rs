@@ -3,7 +3,7 @@ mod img_map;
 mod to_json;
 
 use super::utils::{
-    get_img_buffer::{get_img_buffer, Buffer},
+    img::{get_img_buffer, Buffer},
     walk_path::PathMap,
 };
 

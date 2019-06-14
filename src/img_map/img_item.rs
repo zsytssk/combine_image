@@ -1,4 +1,4 @@
-use crate::utils::get_img_buffer::{Buffer, Size};
+use crate::utils::img::{Buffer, Size};
 use crate::utils::path::file_name;
 use std::fmt;
 

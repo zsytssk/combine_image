@@ -1,5 +1,5 @@
 use super::super::utils::{
-    get_img_buffer::{combine, Buffer, List},
+    img::{combine, Buffer, List},
     pack_rect::{run as pack, RectList},
 };
 
