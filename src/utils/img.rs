@@ -24,7 +24,7 @@ pub fn get_img_buffer(path: &str) -> (Buffer, Size) {
     for x in 0..ow {
         for y in 0..oh {
             let raw_data = img.get_pixel(x, y).unwrap();
-            if !isEmpty(&raw_data) {
+            if !is_empty(&raw_data) {
                 no_empty_info.push((x, y))
             }
         }
@@ -51,7 +51,7 @@ pub fn get_img_buffer(path: &str) -> (Buffer, Size) {
     let mut img_buf = Image::blank(w, h);
     for x  in 0..w {
         for y  in 0..h {
-            img_buf.set_pixel(x, y, img.get_pixel(x1 + x, y1 + y).unwrap());
+            img_buf.set_pixel(x, y, img.get_pixel(x1 + x, y1 + y).unwrap()).unwrap();
         }
     }
     let size = Size {
@@ -75,7 +75,7 @@ pub fn combine(info: Info) -> Buffer {
 
         for ix in 0..buffer.width {
             for iy in 0..buffer.height {
-                all_buffer.set_pixel(x + ix , y + iy , buffer.get_pixel(ix , iy ).unwrap());
+                all_buffer.set_pixel(x + ix , y + iy , buffer.get_pixel(ix , iy ).unwrap()).unwrap();
             }
         }
     }
@@ -89,7 +89,7 @@ pub fn size(img: &Buffer) -> (i32, i32) {
     (*&img.width , *&img.height)
 }
 
-fn isEmpty(pixel: &Color) -> bool {
+fn is_empty(pixel: &Color) -> bool {
     let Color {r, g, b, a} = pixel;
     if r + g + b + a == 0 {
         return true;
