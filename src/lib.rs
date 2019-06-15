@@ -9,14 +9,14 @@ use std::fs;
 
 use std::thread;
 use std::time::Instant;
-use utils::{path, walk_path};
+use utils::{img::save, path, walk_path};
 
 pub fn run(
     src: &str,
     dist: &str,
     json_suffix: &str,
-    space_width: u32,
-    space_height: u32,
+    space_width: i32,
+    space_height: i32,
     prefix: &str,
 ) {
     let now = Instant::now();
@@ -66,7 +66,7 @@ pub fn run(
             let dist_atlas_path = format!("{}/{}.{}", dir_path, file_name, &json_suffix);
 
             fs::write(dist_atlas_path, map_item.to_json()).expect("Unable to write file");
-            buffer.save(dist_img_path).unwrap();
+            save(buffer, &dist_img_path);
 
             let mut state = (&state::STATE).lock().unwrap();
             state.n += 1;

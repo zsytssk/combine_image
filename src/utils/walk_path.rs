@@ -1,4 +1,4 @@
-use super::path::{is_exist, path_type};
+use super::path::{is_exist};
 use std::fs::read_dir;
 
 #[derive(Debug)]

@@ -3,7 +3,7 @@ mod img_map;
 mod to_json;
 
 use super::utils::{
-    get_img_buffer::{get_img_buffer, Buffer},
+    img::{get_img_buffer, size},
     walk_path::PathMap,
 };
 
@@ -23,8 +23,8 @@ pub fn run(path: PathMap) -> ImgMap {
 
     let mut same_size = true;
     img_list.sort_by(|a, b| {
-        let (aw, ah) = a.buffer.dimensions();
-        let (bw, bh) = b.buffer.dimensions();
+        let (aw, ah) = size(&a.buffer);
+        let (bw, bh) = size(&b.buffer);
         let result = (bw * bh).cmp(&(aw * ah));
         match result {
             Ordering::Equal => {}
@@ -39,6 +39,3 @@ pub fn run(path: PathMap) -> ImgMap {
     ImgMap::new(name, img_list)
 }
 
-pub fn removeImgListEmpty(img_list: &Vec<ImgItem>, same_size: bool) {
-    for item in img_list {}
-}

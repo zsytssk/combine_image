@@ -3,6 +3,8 @@ extern crate image;
 use image::{open, GenericImageView, ImageBuffer};
 
 pub type Buffer = ImageBuffer<image::Rgba<u8>, std::vec::Vec<u8>>;
+pub type List<'a> = Vec<((i32, i32), &'a Buffer)>;
+pub type Info<'a> = ((i32, i32), List<'a>);
 
 pub struct Size {
     pub x: u32,
@@ -16,15 +18,17 @@ pub struct Size {
 pub fn get_img_buffer(path: &str) -> (Buffer, Size) {
     let img = open(path).unwrap();
     let (ow, oh) = img.dimensions();
-    let img_buf: Buffer = ImageBuffer::new(ow, oh);
     let mut no_empty_info: Vec<(u32, u32)> = vec![];
     // Iterate over the coordinates and pixels of the image
-    for (x, y, pixel) in img_buf.enumerate_pixels() {
-        let raw_data = img.get_pixel(x, y);
-        if !isEmpty(&raw_data) {
-            no_empty_info.push((x, y))
+    for x in 0..ow {
+        for y in 0..oh {
+            let raw_data = img.get_pixel(x, y);
+            if !is_empty(&raw_data) {
+                no_empty_info.push((x, y))
+            }
         }
     }
+
     no_empty_info.sort_by(|a, b| {
         let ax = a.0;
         let bx = b.0;
@@ -58,22 +62,27 @@ pub fn get_img_buffer(path: &str) -> (Buffer, Size) {
     (img_buf, size)
 }
 
-pub type List<'a> = Vec<((u32, u32), &'a Buffer)>;
-type Info<'a> = ((u32, u32), List<'a>);
 pub fn combine(info: Info) -> Buffer {
     let ((width, height), list) = info;
-    let mut all_buffer = ImageBuffer::new(width, height);
+    let mut all_buffer = ImageBuffer::new(width as u32, height as u32);
     for item in &list {
         let ((x, y), buffer) = item;
         for (ix, iy, pixel) in buffer.enumerate_pixels() {
-            all_buffer.put_pixel(x + ix, y + iy, *pixel);
+            all_buffer.put_pixel((*x as u32) + ix, (*y as u32) + iy, *pixel);
         }
     }
     return all_buffer;
 }
 
+pub fn save(img: Buffer, path: &str) {
+    img.save(path).unwrap();
+}
+pub fn size(img: &Buffer) -> (i32, i32) {
+    let (w, h) = img.dimensions();
+    (w as i32, h as i32)
+}
 
-fn isEmpty(pixel: &image::Rgba<u8>) -> bool {
+fn is_empty(pixel: &image::Rgba<u8>) -> bool {
     let [r, g, b, a] = &pixel.data;
     if r + g + b + a == 0 {
         return true;

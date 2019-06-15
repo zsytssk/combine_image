@@ -1,4 +1,43 @@
+- rust thread pool
+
+## 2019-06-15 11:43:18
+
+- rust pub fn ==
+
+- @ques 使用 trait 反而使我这代码变得复杂了
+
+* rust 能不能 pub submodule struct
+
+* function where 只能跟 trait 而不能 是 type alias
+
+* rust 能不能 export as
+
+* [generic associated types are unstable] https://github.com/rust-lang/rfcs/blob/master/text/1598-generic_associated_types.md
+  - type alias within trait
+
+```rs
+pub trait TestTrait {
+    type Item;
+    type Info = Self::Item;
+}
+```
+
+- @todo 像 raster 一样将所有的图片处理 全部放在一个函数中...
+  - 所有的数字全部使用 i32
+
+## 2019-06-14 10:37:48
+
 - 将文件保存 看家里电脑有多快
+
+- imageproc raster
+
+  - image 15420
+  - raster 13879 - 可能是类型转化的结果...
+    - 能不能变成透明
+
+- simd 到底是什么...
+
+- rust get vector biggest
 
 ## 2019-06-12 21:09:52
 
@@ -28,6 +67,8 @@
 
 cargo run --release C:\Users\zsyts\Desktop\test\dlc C:\Users\zsyts\Desktop\test\dist atlas 5 5 resources/
 cargo run --release /mnt/c/Users/zsyts/Desktop/test/dlc /mnt/c/Users/zsyts/Desktop/test/dist atlas 5 5 resources/
+
+cargo run --release C:\Users\zhangshiyang\Desktop\test\dlc C:\Users\zhangshiyang\Desktop\test\dist atlas 5 5 resources/
 
 - test local
 

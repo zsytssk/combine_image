@@ -1,12 +1,12 @@
-use crate::utils::get_img_buffer::{Buffer, Size};
+use crate::utils::img::{Buffer, Size};
 use crate::utils::path::file_name;
 use std::fmt;
 
 pub struct ImgItem {
     pub name: String,
     pub buffer: Buffer,
-    pub x: u32,
-    pub y: u32,
+    pub x: i32,
+    pub y: i32,
     pub ori_size: Size,
 }
 impl ImgItem {
@@ -20,7 +20,7 @@ impl ImgItem {
             ori_size,
         }
     }
-    pub fn set_pos(&mut self, x: u32, y: u32) {
+    pub fn set_pos(&mut self, x: i32, y: i32) {
         self.x = x;
         self.y = y;
     }

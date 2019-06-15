@@ -1,5 +1,4 @@
 use rect_packer::DensePacker;
-use std::cmp::min;
 
 pub type RectList = Vec<(i32, i32)>;
 pub type Result = ((i32, i32), RectList);

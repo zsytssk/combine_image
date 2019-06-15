@@ -1,7 +1,9 @@
 use super::img_map::ImgMap;
 
 use crate::state;
+use crate::utils::img::size;
 use crate::utils::path;
+
 
 pub fn to_json(img_map: &mut ImgMap) -> String {
     let image = format!("{}.png", path::file_name(&img_map.name));
@@ -12,18 +14,17 @@ pub fn to_json(img_map: &mut ImgMap) -> String {
     prefix = format!("{}{}/", pre_prefix, prefix);
     prefix = path::normalize(&prefix);
     drop(state);
+
     let meta = format!("{{\"image\": \"{}\", \"prefix\": \"{}\"}}", image, prefix);
     let mut frames = "".to_owned();
     let list = &img_map.list;
     for (index, item) in list.iter().enumerate() {
         let buffer = &item.buffer;
+        let (w, h) = size(buffer);
         let ori_size = &item.ori_size;
         let frame = format!(
             " {{ \"h\": {}, \"idx\": 0, \"w\": {}, \"x\": {}, \"y\": {} }}",
-            buffer.height(),
-            buffer.width(),
-            item.x,
-            item.y
+            w, h, item.x, item.y
         );
         let source_size = format!(" {{ \"h\": {}, \"w\": {} }}", ori_size.oh, ori_size.ow,);
         let sprite_source_size = format!(" {{ \"x\": {}, \"y\": {} }}", ori_size.x, ori_size.y);

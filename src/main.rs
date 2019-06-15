@@ -12,8 +12,8 @@ fn main() {
     let src = &args[0];
     let dist = &args[1];
     let json_suffix = &args[2];
-    let space_width = args[3].parse::<u32>().unwrap();
-    let space_height = args[4].parse::<u32>().unwrap();
+    let space_width = args[3].parse::<i32>().unwrap();
+    let space_height = args[4].parse::<i32>().unwrap();
     let mut prefix = "";
     if args.len() == 6 {
         prefix = &args[5];
