@@ -1,3 +1,23 @@
+- rust pub fn ==
+
+- @ques 使用 trait 反而使我这代码变得复杂了
+
+* rust 能不能 pub submodule struct
+
+* function where 只能跟 trait 而不能 是 type alias
+
+* rust 能不能 export as
+
+* [generic associated types are unstable] https://github.com/rust-lang/rfcs/blob/master/text/1598-generic_associated_types.md
+  - type alias within trait
+
+```rs
+pub trait TestTrait {
+    type Item;
+    type Info = Self::Item;
+}
+```
+
 - @todo 像 raster 一样将所有的图片处理 全部放在一个函数中...
   - 所有的数字全部使用 i32
 

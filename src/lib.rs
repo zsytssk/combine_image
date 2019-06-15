@@ -9,14 +9,14 @@ use std::fs;
 
 use std::thread;
 use std::time::Instant;
-use utils::{path, walk_path, img:: {save}};
+use utils::{img::save, path, walk_path};
 
 pub fn run(
     src: &str,
     dist: &str,
     json_suffix: &str,
-    space_width: u32,
-    space_height: u32,
+    space_width: i32,
+    space_height: i32,
     prefix: &str,
 ) {
     let now = Instant::now();

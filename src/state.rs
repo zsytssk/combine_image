@@ -11,8 +11,8 @@ pub struct State {
     pub dist: String,
     pub json_suffix: String,
     pub prefix: String,
-    pub space_width: u32,
-    pub space_height: u32,
+    pub space_width: i32,
+    pub space_height: i32,
     pub n: usize,
 }
 
@@ -33,8 +33,8 @@ impl State {
         src: &str,
         dist: &str,
         json_suffix: &str,
-        space_width: u32,
-        space_height: u32,
+        space_width: i32,
+        space_height: i32,
         n: usize,
         prefix: &str,
     ) {
