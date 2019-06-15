@@ -62,11 +62,11 @@ pub fn get_img_buffer(path: &str) -> (Buffer, Size) {
 
 pub fn combine(info: Info) -> Buffer {
     let ((width, height), list) = info;
-    let mut all_buffer = ImageBuffer::new(width, height);
+    let mut all_buffer = ImageBuffer::new(width as u32, height as u32);
     for item in &list {
         let ((x, y), buffer) = item;
         for (ix, iy, pixel) in buffer.enumerate_pixels() {
-            all_buffer.put_pixel(x + ix, y + iy, *pixel);
+            all_buffer.put_pixel((*x as u32) + ix, (*y as u32) + iy, *pixel);
         }
     }
     return all_buffer;
@@ -76,7 +76,8 @@ pub fn save(img: Buffer, path: &str) {
     img::save(path).unwrap();
 }
 pub fn size(img: &Buffer) -> (i32, i32) {
-    img.dimensions()
+    let (w, h) = img.dimensions();
+    (w as i32, h as i32)
 }
 
 fn isEmpty(pixel: &image::Rgba<u8>) -> bool {
