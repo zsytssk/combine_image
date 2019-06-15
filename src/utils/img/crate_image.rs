@@ -28,6 +28,7 @@ pub fn get_img_buffer(path: &str) -> (Buffer, Size) {
             }
         }
     }
+
     no_empty_info.sort_by(|a, b| {
         let ax = a.0;
         let bx = b.0;

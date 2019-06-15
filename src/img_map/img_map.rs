@@ -30,6 +30,8 @@ impl ImgMap {
         let state = &(&state::STATE).lock().unwrap();
         let space_width = state.space_width as i32;
         let space_height = state.space_height as i32;
+        drop(state);
+
         for item in list.iter() {
             let (w, h ) = size(&item.buffer);
             rect_list.push(((w + space_width) as i32, (h + space_height) as i32))
