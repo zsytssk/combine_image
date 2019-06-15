@@ -1,19 +1,20 @@
-mod img_raster;
+mod crate_raster;
+mod crate_image;
 
-pub type Buffer = img_raster::Buffer;
-pub type Size = img_raster::Size;
-pub type List<'a> = img_raster::List<'a>;
-pub type Info<'a> = img_raster::Info<'a>;
+pub type Buffer = crate_image::Buffer;
+pub type Size = crate_image::Size;
+pub type List<'a> = crate_image::List<'a>;
+pub type Info<'a> = crate_image::Info<'a>;
 
-pub fn get_img_buffer(path: &str) ->(Buffer, Size) {
-    img_raster::get_img_buffer(path)
+pub fn get_img_buffer(path: &str) -> (Buffer, Size) {
+    crate_image::get_img_buffer(path)
 }
 pub fn combine(info: Info) -> Buffer {
-    img_raster::combine(info)
+    crate_image::combine(info)
 }
-pub fn save(img: Buffer, path: &str)  {
-    img_raster::save(img, path)
+pub fn save(img: Buffer, path: &str) {
+    crate_image::save(img, path)
 }
 pub fn size(img: &Buffer) -> (i32, i32) {
-    img_raster::size(img)
+    crate_image::size(img)
 }
