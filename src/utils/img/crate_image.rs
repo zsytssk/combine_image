@@ -18,13 +18,14 @@ pub struct Size {
 pub fn get_img_buffer(path: &str) -> (Buffer, Size) {
     let img = open(path).unwrap();
     let (ow, oh) = img.dimensions();
-    let img_buf: Buffer = ImageBuffer::new(ow, oh);
     let mut no_empty_info: Vec<(u32, u32)> = vec![];
     // Iterate over the coordinates and pixels of the image
-    for (x, y, pixel) in img_buf.enumerate_pixels() {
-        let raw_data = img.get_pixel(x, y);
-        if !isEmpty(&raw_data) {
-            no_empty_info.push((x, y))
+    for x in 0..ow {
+        for y in 0..oh {
+            let raw_data = img.get_pixel(x, y);
+            if !is_empty(&raw_data) {
+                no_empty_info.push((x, y))
+            }
         }
     }
     no_empty_info.sort_by(|a, b| {
@@ -73,14 +74,14 @@ pub fn combine(info: Info) -> Buffer {
 }
 
 pub fn save(img: Buffer, path: &str) {
-    img::save(path).unwrap();
+    img.save(path).unwrap();
 }
 pub fn size(img: &Buffer) -> (i32, i32) {
     let (w, h) = img.dimensions();
     (w as i32, h as i32)
 }
 
-fn isEmpty(pixel: &image::Rgba<u8>) -> bool {
+fn is_empty(pixel: &image::Rgba<u8>) -> bool {
     let [r, g, b, a] = &pixel.data;
     if r + g + b + a == 0 {
         return true;
