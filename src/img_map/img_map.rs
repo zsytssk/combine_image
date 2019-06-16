@@ -5,7 +5,7 @@ use super::super::utils::{
 
 use super::img_item::ImgItem;
 use super::to_json::to_json;
-use crate::state;
+use crate::state::State;
 
 #[derive(Debug)]
 pub struct ImgMap {
@@ -27,10 +27,9 @@ impl ImgMap {
     pub fn set_img_pos(&mut self) {
         let list = &mut self.list;
         let mut rect_list: RectList = vec![];
-        let state = &(&state::STATE).lock().unwrap();
+        let state = State::get();
         let space_width = state.space_width as i32;
         let space_height = state.space_height as i32;
-        drop(state);
 
         for item in list.iter() {
             let (w, h) = size(&item.buffer);

@@ -1,12 +1,11 @@
-#[macro_use]
-extern crate lazy_static;
-
 mod img_map;
 
 mod state;
 mod utils;
 use std::fs;
 
+use state::State;
+use std::boxed;
 use std::time::Instant;
 use threadpool::ThreadPool;
 use utils::{img::save, path, walk_path};
@@ -30,24 +29,15 @@ pub fn run(
     );
 
     let all = paths.len();
-    (&state::STATE).lock().unwrap().init(
-        src,
-        dist,
-        json_suffix,
-        space_width,
-        space_height,
-        0,
-        prefix,
-    );
+    State::init(src, dist, json_suffix, space_width, space_height, prefix);
 
     let pool = ThreadPool::new(20);
     for path in paths {
         pool.execute(move || {
-            let state = (&state::STATE).lock().unwrap();
-            let src = (&state.src).to_owned();
-            let dist = (&state.dist).to_owned();
-            let json_suffix = (&state.json_suffix).to_owned();
-            drop(state);
+            let state = State::get();
+            let src = state.src.to_owned();
+            let dist = state.dist.to_owned();
+            let json_suffix = state.json_suffix.to_owned();
 
             let mut map_item = img_map::run(path);
             let mut file_path = path::relative(&map_item.name, &src).unwrap();
@@ -67,10 +57,9 @@ pub fn run(
             fs::write(dist_atlas_path, map_item.to_json()).expect("Unable to write file");
             save(buffer, &dist_img_path);
 
-            let mut state = (&state::STATE).lock().unwrap();
-            state.n += 1;
-            println!("combine:> {}% -- {}", state.n * 100 / all, file_path);
-            drop(state);
+            let mut n = State::get().n.lock().unwrap();
+            *n += 1;
+            println!("combine:> {}% -- {}", (*n * 100) / all, file_path);
         });
     }
 

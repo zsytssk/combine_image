@@ -1,18 +1,17 @@
 use super::img_map::ImgMap;
 
-use crate::state;
+use crate::state::State;
 use crate::utils::img::size;
 use crate::utils::path;
 
 pub fn to_json(img_map: &mut ImgMap) -> String {
     let image = format!("{}.png", path::file_name(&img_map.name));
-    let state = (&state::STATE).lock().unwrap();
+    let state = State::get();
     let src = &state.src;
     let pre_prefix = &state.prefix;
     let mut prefix = path::relative(&img_map.name, &src).unwrap();
     prefix = format!("{}{}/", pre_prefix, prefix);
     prefix = path::normalize(&prefix);
-    drop(state);
 
     let meta = format!("{{\"image\": \"{}\", \"prefix\": \"{}\"}}", image, prefix);
     let mut frames = "".to_owned();
