@@ -47,7 +47,3 @@ impl State {
         self.prefix = prefix.to_owned();;
     }
 }
-
-function initState() {
-
-}
