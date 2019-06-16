@@ -6,7 +6,7 @@ use crate::utils::path;
 
 pub fn to_json(img_map: &mut ImgMap) -> String {
     let image = format!("{}.png", path::file_name(&img_map.name));
-    let state = (&state::STATE).lock().unwrap();
+    let state = (&state::STATE);
     let src = &state.src;
     let pre_prefix = &state.prefix;
     let mut prefix = path::relative(&img_map.name, &src).unwrap();

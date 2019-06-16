@@ -1,8 +1,7 @@
-
-use std::sync::{Mutex};
+use std::sync::{Arc, Mutex};
 
 lazy_static! {
-    pub static ref STATE: Mutex<State> = Mutex::new(State::new());
+    pub static ref STATE: Arc<State> = Arc::new(State::new());
 }
 
 #[derive(Debug)]

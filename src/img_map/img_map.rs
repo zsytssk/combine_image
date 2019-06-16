@@ -27,7 +27,7 @@ impl ImgMap {
     pub fn set_img_pos(&mut self) {
         let list = &mut self.list;
         let mut rect_list: RectList = vec![];
-        let state = &(&state::STATE).lock().unwrap();
+        let state = &(&state::STATE);
         let space_width = state.space_width as i32;
         let space_height = state.space_height as i32;
         drop(state);
