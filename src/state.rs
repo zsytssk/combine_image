@@ -1,5 +1,5 @@
 
-use std::sync::Mutex;
+use std::sync::{Mutex};
 
 lazy_static! {
     pub static ref STATE: Mutex<State> = Mutex::new(State::new());

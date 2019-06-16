@@ -1,5 +1,3 @@
-extern crate lib;
-
 use lib::run;
 use std::env;
 

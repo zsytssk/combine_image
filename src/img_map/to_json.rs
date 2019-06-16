@@ -4,7 +4,6 @@ use crate::state;
 use crate::utils::img::size;
 use crate::utils::path;
 
-
 pub fn to_json(img_map: &mut ImgMap) -> String {
     let image = format!("{}.png", path::file_name(&img_map.name));
     let state = (&state::STATE).lock().unwrap();

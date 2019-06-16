@@ -1,5 +1,5 @@
 use super::super::utils::{
-    img::{combine, Buffer, List, size},
+    img::{combine, size, Buffer, List},
     pack_rect::{run as pack, RectList},
 };
 
@@ -33,7 +33,7 @@ impl ImgMap {
         drop(state);
 
         for item in list.iter() {
-            let (w, h ) = size(&item.buffer);
+            let (w, h) = size(&item.buffer);
             rect_list.push(((w + space_width) as i32, (h + space_height) as i32))
         }
         let ((width, height), pos_list) = pack(rect_list);

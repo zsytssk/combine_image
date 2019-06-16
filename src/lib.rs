@@ -7,8 +7,8 @@ mod state;
 mod utils;
 use std::fs;
 
-use std::thread;
 use std::time::Instant;
+use threadpool::ThreadPool;
 use utils::{img::save, path, walk_path};
 
 pub fn run(
@@ -20,7 +20,6 @@ pub fn run(
     prefix: &str,
 ) {
     let now = Instant::now();
-
 
     let paths = walk_path::run(src);
 
@@ -41,9 +40,9 @@ pub fn run(
         prefix,
     );
 
-    let mut handles = vec![];
+    let pool = ThreadPool::new(20);
     for path in paths {
-        let handle = thread::spawn(move || {
+        pool.execute(move || {
             let state = (&state::STATE).lock().unwrap();
             let src = (&state.src).to_owned();
             let dist = (&state.dist).to_owned();
@@ -73,11 +72,8 @@ pub fn run(
             println!("combine:> {}% -- {}", state.n * 100 / all, file_path);
             drop(state);
         });
-        handles.push(handle);
-    }
-    for handle in handles {
-        handle.join().unwrap();
     }
 
+    pool.join();
     println!("completed:> {}", now.elapsed().as_millis());
 }

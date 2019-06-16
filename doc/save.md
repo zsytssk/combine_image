@@ -1,3 +1,21 @@
+## 测试命令
+
+- test all bin
+  cargo run --release D:\zsytssk\job\legend\legend_demo\dlc D:\zsytssk\job\legend\legend_demo\bin\resources atlas 2 2 resources/
+
+- test bin
+  cargo run --release D:\zsytssk\job\legend\legend_demo\dlc\npc\30001 D:\zsytssk\job\legend\legend_demo\bin\resources\npc\30001 atlas 2 2 resources/npc/30001/
+
+* test desktop
+
+cargo run --release C:\Users\zsyts\Desktop\test\dlc C:\Users\zsyts\Desktop\test\dist atlas 5 5 resources/
+
+cargo run --release C:\Users\zhangshiyang\Desktop\test\dlc C:\Users\zhangshiyang\Desktop\test\dist atlas 5 5 resources/
+
+- test local
+
+cargo run --release ./test/src ./test/dist json 2 2 resources/
+
 ## 学习 rust
 
 ### 了解基础 核心思想

@@ -1,8 +1,14 @@
-- rust thread pool
+- learn rust thread pool
+
+  - 固定 thread 的数量
+
+- 内存的占用...
+
+  - thread pool
+
+- 全局变量
 
 ## 2019-06-15 11:43:18
-
-- rust pub fn ==
 
 - @ques 使用 trait 反而使我这代码变得复杂了
 
@@ -20,6 +26,9 @@ pub trait TestTrait {
     type Item;
     type Info = Self::Item;
 }
+
+// export * from './...'
+pub fn == submodel.xxxfun;
 ```
 
 - @todo 像 raster 一样将所有的图片处理 全部放在一个函数中...
@@ -54,25 +63,6 @@ pub trait TestTrait {
   - https://crates.io/crates/state
 
 - 本地 laya 的速度 vs wsl 上面的速度
-
-## 2019-06-13 22:17:54
-
-- test all bin
-  cargo run --release D:\zsytssk\job\legend\legend_demo\dlc D:\zsytssk\job\legend\legend_demo\bin\resources atlas 2 2 resources/
-
-- test bin
-  cargo run --release D:\zsytssk\job\legend\legend_demo\dlc\npc\30001 D:\zsytssk\job\legend\legend_demo\bin\resources\npc\30001 atlas 2 2 resources/npc/30001/
-
-* test desktop
-
-cargo run --release C:\Users\zsyts\Desktop\test\dlc C:\Users\zsyts\Desktop\test\dist atlas 5 5 resources/
-cargo run --release /mnt/c/Users/zsyts/Desktop/test/dlc /mnt/c/Users/zsyts/Desktop/test/dist atlas 5 5 resources/
-
-cargo run --release C:\Users\zhangshiyang\Desktop\test\dlc C:\Users\zhangshiyang\Desktop\test\dist atlas 5 5 resources/
-
-- test local
-
-cargo run --release ./test/src ./test/dist json 2 2 resources/
 
 - @ques 受伤的村名 npc 怎么跑到页面上面去了
 

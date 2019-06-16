@@ -35,7 +35,5 @@ pub fn run(path: PathMap) -> ImgMap {
         result
     });
 
-
     ImgMap::new(name, img_list)
 }
-

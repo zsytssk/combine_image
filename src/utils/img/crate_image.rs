@@ -1,5 +1,3 @@
-extern crate image;
-
 use image::{open, GenericImageView, ImageBuffer};
 
 pub type Buffer = ImageBuffer<image::Rgba<u8>, std::vec::Vec<u8>>;
