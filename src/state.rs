@@ -1,7 +1,8 @@
-use std::sync::{Arc, Mutex};
+
+use std::sync::{Mutex};
 
 lazy_static! {
-    pub static ref STATE: Arc<State> = Arc::new(State::new());
+    pub static ref STATE: Mutex<State> = Mutex::new(State::new());
 }
 
 #[derive(Debug)]
@@ -45,4 +46,8 @@ impl State {
         self.n = n;
         self.prefix = prefix.to_owned();;
     }
+}
+
+function initState() {
+
 }
