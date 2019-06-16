@@ -5,7 +5,6 @@ mod utils;
 use std::fs;
 
 use state::State;
-use std::boxed;
 use std::time::Instant;
 use threadpool::ThreadPool;
 use utils::{img::save, path, walk_path};
