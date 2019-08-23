@@ -30,7 +30,7 @@ pub fn run(
     let all = paths.len();
     State::init(src, dist, json_suffix, space_width, space_height, prefix);
 
-    let pool = ThreadPool::new(20);
+    let pool = ThreadPool::new(5);
     for path in paths {
         pool.execute(move || {
             let state = State::get();
