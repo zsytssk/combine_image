@@ -1,3 +1,5 @@
+- mac `chmod +x ./script/genAtlas/combine_image`
+
 ## 测试命令
 
 - test all bin
