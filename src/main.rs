@@ -17,14 +17,7 @@ fn main() {
     if args.len() == 6 {
         prefix = &args[5];
     }
-    task::block_on(run(
-        src,
-        dist,
-        json_suffix,
-        space_width,
-        space_height,
-        prefix,
-    ));
+    run(src, dist, json_suffix, space_width, space_height, prefix);
 }
 
 fn args_err_tip() {

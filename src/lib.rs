@@ -9,7 +9,7 @@ use state::State;
 use std::time::Instant;
 use utils::{img::save, path, walk_path};
 
-pub async fn run(
+pub fn run(
     src: &str,
     dist: &str,
     json_suffix: &str,
@@ -62,9 +62,12 @@ pub async fn run(
 
         tasks.push(task_item);
     }
-    for task_item in tasks {
-        task_item.await;
-    }
+
+    task::block_on(async {
+        for task_item in tasks {
+            task_item.await;
+        }
+    });
 
     println!("completed:> {}", now.elapsed().as_millis());
 }

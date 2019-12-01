@@ -1,6 +1,12 @@
 cargo run --release C:\Users\zsyts\Desktop\dlc C:\Users\zsyts\Desktop\dlc-dist atlas 5 5 resources/
 
+- https://www.youtube.com/watch?v=L7X0vpAU-sU&list=WL&index=11&t=1524s
+
 - @todo update one_cell
+
+- @todo join_all
+
+- @ques 怎么发布 cargo build --release
 
 - @ques 怎么发布
 
@@ -10,6 +16,8 @@ cargo run --release C:\Users\zsyts\Desktop\dlc C:\Users\zsyts\Desktop\dlc-dist a
   - 是并发的, 那么到底并发几个呢 有点看不懂
   - concurrency parallel
   - task::spawn 到底是干什么的 thread::spawn 是做什么的
+  - 是不是 会自动分配 thread 去执行多个任务...
+  - 内部到底是怎么执行的
 
 ```rs
 for task_item in tasks {
