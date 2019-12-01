@@ -81,7 +81,7 @@ pub fn size(img: &Buffer) -> (i32, i32) {
 }
 
 fn is_empty(pixel: &image::Rgba<u8>) -> bool {
-    let [r, g, b, a] = &pixel.data;
+    let image::Rgba([r, g, b, a]) = &pixel;
     if r + g + b + a == 0 {
         return true;
     }

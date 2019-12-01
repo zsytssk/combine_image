@@ -1,6 +1,4 @@
-
 mod crate_image;
-mod crate_raster;
 
 pub type Buffer = crate_image::Buffer;
 pub type Size = crate_image::Size;
