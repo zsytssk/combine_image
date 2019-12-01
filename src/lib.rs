@@ -29,7 +29,7 @@ pub async fn run(
     let all = paths.len();
     State::init(src, dist, json_suffix, space_width, space_height, prefix);
 
-    let mut tasks: Vec<task::JoinHandle<_>> = vec![];
+    let mut tasks: Vec<task::JoinHandle<()>> = vec![];
     for path in paths {
         let task_item = task::spawn(async move {
             let state = State::get();
@@ -62,9 +62,8 @@ pub async fn run(
 
         tasks.push(task_item);
     }
-
     for task_item in tasks {
-        task_item.await
+        task_item.await;
     }
 
     println!("completed:> {}", now.elapsed().as_millis());

@@ -2,6 +2,21 @@ cargo run --release C:\Users\zsyts\Desktop\dlc C:\Users\zsyts\Desktop\dlc-dist a
 
 - @todo update one_cell
 
+- @ques 怎么发布
+
+- @ques 怎么让异步函数一个接着一个执行 | 怎么并发执行(并设定同事的并发数目)
+
+- @ques 下面的代码是一个接一个运行还是一起运行...
+  - 是并发的, 那么到底并发几个呢 有点看不懂
+  - concurrency parallel
+  - task::spawn 到底是干什么的 thread::spawn 是做什么的
+
+```rs
+for task_item in tasks {
+    task_item.await
+}
+```
+
 ## 2019-12-01 09:15:35
 
 - learn rust thread pool
