@@ -1,5 +1,7 @@
 cargo run --release C:\Users\zsyts\Desktop\dlc C:\Users\zsyts\Desktop\dlc-dist atlas 5 5 resources/
 
+- @todo update one_cell
+
 ## 2019-12-01 09:15:35
 
 - learn rust thread pool

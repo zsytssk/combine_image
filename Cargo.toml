@@ -10,6 +10,7 @@ rect_packer = "0.2.1"
 raster = "0.2.0"
 threadpool = "1.7.1"
 once_cell = "0.2.1"
+async-std = "1.2.0"
 
 [lib]
 name = "lib"

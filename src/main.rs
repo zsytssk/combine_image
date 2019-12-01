@@ -1,3 +1,4 @@
+use async_std::task;
 use lib::run;
 use std::env;
 
@@ -16,7 +17,14 @@ fn main() {
     if args.len() == 6 {
         prefix = &args[5];
     }
-    run(src, dist, json_suffix, space_width, space_height, prefix);
+    task::block_on(run(
+        src,
+        dist,
+        json_suffix,
+        space_width,
+        space_height,
+        prefix,
+    ));
 }
 
 fn args_err_tip() {

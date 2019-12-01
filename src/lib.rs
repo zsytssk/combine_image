@@ -4,12 +4,12 @@ mod state;
 mod utils;
 use std::fs;
 
+use async_std::task;
 use state::State;
 use std::time::Instant;
-use threadpool::ThreadPool;
 use utils::{img::save, path, walk_path};
 
-pub fn run(
+pub async fn run(
     src: &str,
     dist: &str,
     json_suffix: &str,
@@ -18,7 +18,6 @@ pub fn run(
     prefix: &str,
 ) {
     let now = Instant::now();
-
     let paths = walk_path::run(src);
 
     println!(
@@ -30,9 +29,9 @@ pub fn run(
     let all = paths.len();
     State::init(src, dist, json_suffix, space_width, space_height, prefix);
 
-    let pool = ThreadPool::new(5);
+    let mut tasks: Vec<task::JoinHandle<_>> = vec![];
     for path in paths {
-        pool.execute(move || {
+        let task_item = task::spawn(async move {
             let state = State::get();
             let src = state.src.to_owned();
             let dist = state.dist.to_owned();
@@ -60,8 +59,13 @@ pub fn run(
             *n += 1;
             println!("combine:> {}% -- {}", (*n * 100) / all, file_path);
         });
+
+        tasks.push(task_item);
     }
 
-    pool.join();
+    for task_item in tasks {
+        task_item.await
+    }
+
     println!("completed:> {}", now.elapsed().as_millis());
 }
