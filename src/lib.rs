@@ -2,8 +2,8 @@ mod img_map;
 
 mod state;
 mod utils;
-use std::fs;
 
+use async_std::fs;
 use async_std::task;
 use state::State;
 use std::time::Instant;
@@ -37,7 +37,7 @@ pub fn run(
             let dist = state.dist.to_owned();
             let json_suffix = state.json_suffix.to_owned();
 
-            let mut map_item = img_map::run(path);
+            let mut map_item = img_map::run(path).await;
             let mut file_path = path::relative(&map_item.name, &src).unwrap();
             if &file_path == "" {
                 file_path = path::file_name(&map_item.name).to_owned();
@@ -52,8 +52,10 @@ pub fn run(
             let dist_img_path = format!("{}/{}.png", dir_path, file_name);
             let dist_atlas_path = format!("{}/{}.{}", dir_path, file_name, &json_suffix);
 
-            fs::write(dist_atlas_path, map_item.to_json()).expect("Unable to write file");
-            save(buffer, &dist_img_path);
+            fs::write(dist_atlas_path, map_item.to_json())
+                .await
+                .expect("Unable to write file");
+            save(buffer, dist_img_path).await;
 
             let mut n = State::get().n.lock().unwrap();
             *n += 1;

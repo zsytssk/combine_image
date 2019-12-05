@@ -1,3 +1,30 @@
+- open+save 可以做成异步的不杜塞
+
+- @ques BufRead 是什么东西
+
+- @ques 怎么把图片保存起来
+
+- @fail 异步打开 太慢 保存 不知道怎么保存...
+
+```rs
+// 这上面都不行...
+use async_std::fs::{write, File};
+use async_std::prelude::*;
+
+let mut file = File::create(path).await.unwrap();
+let content = img.into_vec();
+file.write(&content).await.unwrap();
+write(path, content).await.unwrap();
+
+// open
+let mut file = File::open(path).await.unwrap();
+let mut content = Vec::new();
+file.read_to_end(&mut content).await.unwrap();
+let img = load_from_memory(&content, ImageFormat::PNG);
+```
+
+## 2019-12-05 09:19:06
+
 cargo run --release C:\Users\zsyts\Desktop\dlc C:\Users\zsyts\Desktop\dlc-dist atlas 5 5 resources/
 
 - https://www.youtube.com/watch?v=L7X0vpAU-sU&list=WL&index=11&t=1524s

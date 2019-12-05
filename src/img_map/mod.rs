@@ -11,12 +11,12 @@ use img_item::ImgItem;
 use img_map::ImgMap;
 use std::cmp::Ordering;
 
-pub fn run(path: PathMap) -> ImgMap {
+pub async fn run(path: PathMap) -> ImgMap {
     let (name, list) = path.data();
     let mut img_list: Vec<ImgItem> = vec![];
 
     for item in list {
-        let (buffer, no_empty_info) = get_img_buffer(&item);
+        let (buffer, no_empty_info) = get_img_buffer(&item).await;
         let img_item = ImgItem::new(item, buffer, no_empty_info);
         img_list.push(img_item);
     }

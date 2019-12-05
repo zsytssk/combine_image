@@ -1,4 +1,4 @@
-use image::{open, GenericImageView, ImageBuffer};
+use image::{open, DynamicImage, GenericImageView, ImageBuffer, ImageResult};
 
 pub type Buffer = ImageBuffer<image::Rgba<u8>, std::vec::Vec<u8>>;
 pub type List<'a> = Vec<((i32, i32), &'a Buffer)>;
@@ -13,11 +13,10 @@ pub struct Size {
     pub oh: u32,
 }
 
-pub fn get_img_buffer(path: &str) -> (Buffer, Size) {
-    let img = open(path).unwrap();
+pub async fn get_img_buffer(path: &str) -> (Buffer, Size) {
+    let img = open_img(path).await.unwrap();
     let (ow, oh) = img.dimensions();
     let mut no_empty_info: Vec<(u32, u32)> = vec![];
-    // Iterate over the coordinates and pixels of the image
     for x in 0..ow {
         for y in 0..oh {
             let raw_data = img.get_pixel(x, y);
@@ -72,8 +71,12 @@ pub fn combine(info: Info) -> Buffer {
     return all_buffer;
 }
 
-pub fn save(img: Buffer, path: &str) {
+pub async fn save(img: Buffer, path: String) {
     img.save(path).unwrap();
+}
+pub async fn open_img(path: &str) -> ImageResult<DynamicImage> {
+    let img = open(path);
+    img
 }
 pub fn size(img: &Buffer) -> (i32, i32) {
     let (w, h) = img.dimensions();
