@@ -1,5 +1,27 @@
 - mac `chmod +x ./script/genAtlas/combine_image`
 
+## 异步打开图片
+
+- @fail 异步打开 太慢 保存 不知道怎么保存...
+
+```rs
+// 这上面都不行...
+use async_std::fs::{write, File};
+use async_std::prelude::*;
+
+// 无法保存正确的 png格式
+let mut file = File::create(path).await.unwrap();
+let content = img.into_vec();
+file.write(&content).await.unwrap();
+write(path, content).await.unwrap();
+
+// 变长了
+let mut file = File::open(path).await.unwrap();
+let mut content = Vec::new();
+file.read_to_end(&mut content).await.unwrap();
+let img = load_from_memory(&content, ImageFormat::PNG);
+```
+
 ## 测试命令
 
 - test all bin
